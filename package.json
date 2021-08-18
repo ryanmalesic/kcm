@@ -1,0 +1,30 @@
+{
+  "name": "kcm",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "test": "sst test",
+    "start": "sst start",
+    "build": "sst build",
+    "deploy": "sst deploy",
+    "remove": "sst remove"
+  },
+  "devDependencies": {
+    "@aws-cdk/assert": "1.114.0",
+    "@types/aws-lambda": "^8.10.70"
+  },
+  "dependencies": {
+    "@aws-cdk/aws-apigatewayv2-authorizers": "1.114.0",
+    "@aws-cdk/aws-s3": "1.114.0",
+    "@aws-cdk/core": "1.114.0",
+    "@aws-sdk/client-dynamodb": "^3.26.0",
+    "@aws-sdk/client-s3": "^3.26.0",
+    "@aws-sdk/s3-request-presigner": "^3.26.0",
+    "@aws-sdk/util-create-request": "^3.25.0",
+    "@aws-sdk/util-dynamodb": "^3.26.0",
+    "@aws-sdk/util-format-url": "^3.25.0",
+    "@serverless-stack/cli": "0.40.0",
+    "@serverless-stack/resources": "0.40.0",
+    "csv-parse": "^4.16.0"
+  }
+}

@@ -1,0 +1,7 @@
+{
+  "name": "kcm",
+  "stage": "dev",
+  "region": "us-east-1",
+  "lint": false,
+  "typeCheck": false
+}
