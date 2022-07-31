@@ -1,5 +1,5 @@
 import { Storage } from "@aws-amplify/storage";
-import { useCallback, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 
 import DashboardHeader from "../components/dashboard/DashboardHeader";
 import DashboardActionsMenu from "../components/dashboard/DashboardActionsMenu";
@@ -11,6 +11,7 @@ import Item from "../types/item";
 import ItemsApi, { ItemsCache } from "../api/ItemsApi";
 import ShelvesCsvEncoder from "../helpers/ShelvesCsvEncoder";
 import CsvDownloader from "../helpers/CsvDownloader";
+import ShelvesLocalStorage from "../helpers/ShelvesLocalStorage";
 
 async function uploadPriceBook(file: File) {
   try {
@@ -49,9 +50,6 @@ const Dashboard: React.FC = () => {
         [...shelves[selectedShelf], item],
         ...shelves.slice(selectedShelf + 1),
       ]);
-
-      ItemsApi.updateCache(item, cache.current);
-
       setLoading(false);
     },
     [selectedShelf]
@@ -122,6 +120,19 @@ const Dashboard: React.FC = () => {
   const missingItemsClassDescs = Array.from(
     new Set(shelves.flat(1).map((item) => item.classDesc))
   );
+
+  useEffect(() => {
+    async function get() {
+      setLoading(true);
+      setShelves(await ShelvesLocalStorage.get());
+      setLoading(false);
+    }
+    get();
+  }, []);
+
+  useEffect(() => {
+    ShelvesLocalStorage.set(shelves);
+  }, [shelves]);
 
   return (
     <>
