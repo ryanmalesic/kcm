@@ -1,6 +1,6 @@
-import Dashboard from "./components/Dashboard";
-import SignIn from "./components/SignIn";
 import { useAppContext } from "./context/AppContext";
+import Dashboard from "./pages/Dashboard";
+import SignIn from "./pages/SignIn";
 
 function App() {
   const { user } = useAppContext();
