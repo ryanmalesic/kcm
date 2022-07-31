@@ -15,6 +15,7 @@
     "@types/node": "^16.11.39",
     "@types/react": "^18.0.12",
     "@types/react-dom": "^18.0.5",
+    "papaparse": "^5.3.2",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "react-scripts": "5.0.1",
@@ -48,6 +49,7 @@
   "devDependencies": {
     "@serverless-stack/static-site-env": "^1.2.22",
     "@tailwindcss/forms": "^0.5.2",
+    "@types/papaparse": "^5.3.3",
     "autoprefixer": "^10.4.7",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.1.2"

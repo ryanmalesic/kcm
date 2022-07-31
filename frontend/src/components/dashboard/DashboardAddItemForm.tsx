@@ -22,6 +22,7 @@ const DashboardAddItemForm: React.FC<DashboardAddItemFormProps> = (props) => {
         }
 
         onSubmit(itemId);
+        setItemId("");
 
         itemIdRef.current?.click();
         itemIdRef.current?.focus();

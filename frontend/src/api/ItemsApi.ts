@@ -23,6 +23,10 @@ async function getItem(
 
   try {
     item = await API.get("items", `/items/${id}`, {});
+    if (item) {
+      updateCache(item, cache);
+    }
+
     return item;
   } catch (err) {
     console.log(err);
