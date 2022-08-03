@@ -5,9 +5,11 @@ import Item from "../types/item";
 
 async function decode(shelvesCsvString: string): Promise<Item[][]> {
   const result = Papa.parse(shelvesCsvString, {
+    newline: "\n",
     delimiter: ",",
     header: false,
   });
+
   if (result.errors && result.errors.length > 0) {
     result.errors.forEach((err) => {
       console.error(err);
@@ -24,7 +26,6 @@ async function decode(shelvesCsvString: string): Promise<Item[][]> {
 
   const shelves = await Promise.all(promises.map(Promise.all.bind(Promise)));
 
-  console.log(shelves);
   return shelves.map((shelf) =>
     shelf.filter((item) => item)
   ) as unknown as Promise<Item[][]>;

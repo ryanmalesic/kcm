@@ -29,7 +29,7 @@ async function getItem(
 
     return item;
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return undefined;
   }
 }
@@ -39,7 +39,7 @@ async function getItemsByClassDesc(classDesc: string): Promise<Item[]> {
     const items = API.get("items", `/items?classDesc=${classDesc}`, {});
     return items;
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return [];
   }
 }
@@ -53,7 +53,7 @@ async function updateCache(item: Item, cache: ItemsCache) {
         cache[item.upc] = item;
       });
     } catch (err) {
-      console.log(err);
+      console.error(err);
     }
   }
 }

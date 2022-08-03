@@ -29,15 +29,6 @@ const getByItemCode = async (itemCode: string): Promise<Item | null> => {
     })
   );
 
-  console.log(
-    await dynamodbClient.send(
-      new GetItemCommand({
-        Key: marshall({ pk: itemCode.substring(0, 7) }),
-        TableName: process.env.TABLE,
-      })
-    )
-  );
-
   if (!item) {
     return null;
   }

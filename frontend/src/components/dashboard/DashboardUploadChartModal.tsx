@@ -1,14 +1,14 @@
 import { Transition, Dialog } from "@headlessui/react";
 import { useState, useRef, useCallback, Fragment } from "react";
 
-interface DashboardUploadMpbModalProps {
+interface DashboardUploadChartModalProps {
   loading: boolean;
   isOpen: boolean;
   onClose: () => void;
   onSubmit: (file: File) => Promise<void>;
 }
 
-const DashboardUploadMpbModal: React.FC<DashboardUploadMpbModalProps> = (
+const DashboardUploadChartModal: React.FC<DashboardUploadChartModalProps> = (
   props
 ) => {
   const { loading, isOpen, onClose, onSubmit } = props;
@@ -52,12 +52,12 @@ const DashboardUploadMpbModal: React.FC<DashboardUploadMpbModalProps> = (
                   as="h3"
                   className="text-lg font-medium leading-6 "
                 >
-                  Upload Price Book
+                  Upload Chart
                 </Dialog.Title>
 
                 <div className="mt-2">
                   <p className="text-sm text-gray-500">
-                    Select a price book to upload items from
+                    Select a chart to load from
                   </p>
                 </div>
 
@@ -109,4 +109,4 @@ const DashboardUploadMpbModal: React.FC<DashboardUploadMpbModalProps> = (
   );
 };
 
-export default DashboardUploadMpbModal;
+export default DashboardUploadChartModal;
