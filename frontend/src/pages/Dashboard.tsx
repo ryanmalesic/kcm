@@ -12,6 +12,8 @@ import ItemsApi, { ItemsCache } from "../api/ItemsApi";
 import ShelvesCsvEncoder from "../helpers/ShelvesCsvEncoder";
 import CsvDownloader from "../helpers/CsvDownloader";
 import ShelvesLocalStorage from "../helpers/ShelvesLocalStorage";
+import DashboardUploadChartModal from "../components/dashboard/DashboardUploadChartModal";
+import CsvUploader from "../helpers/CsvUploader";
 
 async function uploadPriceBook(file: File) {
   try {
@@ -19,7 +21,7 @@ async function uploadPriceBook(file: File) {
       contentType: file.type,
     });
   } catch (err) {
-    console.log(err);
+    console.error(err);
     return;
   }
 }
@@ -30,6 +32,7 @@ const Dashboard: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const [selectedShelf, setSelectedShelf] = useState(0);
   const [shelves, setShelves] = useState<Item[][]>([[]]);
+  const [uploadChartOpen, setUploadChartOpen] = useState(false);
   const [uploadMpbOpen, setUploadMpbOpen] = useState(false);
 
   const cache = useRef<ItemsCache>({});
@@ -107,6 +110,18 @@ const Dashboard: React.FC = () => {
     await signOut();
   }, [signOut]);
 
+  const handleUploadChartClick = useCallback(() => {
+    setUploadChartOpen(true);
+  }, []);
+
+  const handleUploadChartSubmit = useCallback(async (file: File) => {
+    setLoading(true);
+    const shelves = await CsvUploader.uploadChart(file);
+    setLoading(false);
+    setShelves(shelves);
+    setUploadChartOpen(false);
+  }, []);
+
   const handleUploadMpbClick = useCallback(() => {
     setUploadMpbOpen(true);
   }, []);
@@ -115,6 +130,7 @@ const Dashboard: React.FC = () => {
     setLoading(true);
     await uploadPriceBook(file);
     setLoading(false);
+    setUploadMpbOpen(false);
   }, []);
 
   const missingItemsClassDescs = Array.from(
@@ -153,6 +169,7 @@ const Dashboard: React.FC = () => {
             onDownloadMissingClick={handleDownloadMissingClick}
             onDownloadSvicClick={handleDownloadSvicClick}
             onRemoveShelfClick={handleRemoveShelfClick}
+            onUploadChartClick={handleUploadChartClick}
             onUploadMpbClick={handleUploadMpbClick}
           />
         </div>
@@ -169,7 +186,17 @@ const Dashboard: React.FC = () => {
         />
       </main>
 
+      <DashboardUploadChartModal
+        loading={loading}
+        isOpen={uploadChartOpen}
+        onClose={() => {
+          setUploadChartOpen(false);
+        }}
+        onSubmit={handleUploadChartSubmit}
+      />
+
       <DashboardUploadMpbModal
+        loading={loading}
         isOpen={uploadMpbOpen}
         onClose={() => {
           setUploadMpbOpen(false);

@@ -15,6 +15,7 @@ interface DashboardActionsMenuProps {
   onDownloadMissingClick: (classDesc: string) => () => void;
   onDownloadSvicClick: () => void;
   onRemoveShelfClick: () => void;
+  onUploadChartClick: () => void;
   onUploadMpbClick: () => void;
 }
 
@@ -30,6 +31,7 @@ const DashboardActionsMenu: React.FC<DashboardActionsMenuProps> = (props) => {
     onDownloadMissingClick,
     onDownloadSvicClick,
     onRemoveShelfClick,
+    onUploadChartClick,
     onUploadMpbClick,
   } = props;
 
@@ -61,6 +63,15 @@ const DashboardActionsMenu: React.FC<DashboardActionsMenuProps> = (props) => {
               onClick={onRemoveShelfClick}
             >
               Remove Shelf
+            </DashboardActionsMenuItem>
+          </div>
+
+          <div className="px-1 py-1">
+            <DashboardActionsMenuItem
+              disabled={loading}
+              onClick={onUploadChartClick}
+            >
+              Upload Chart
             </DashboardActionsMenuItem>
           </div>
 
